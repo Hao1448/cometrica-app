@@ -1,26 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled, { ThemeProvider} from 'styled-components'
+import { GlobalTheme } from 'base/theme'
+import { GlobalStyle } from 'base/styles'
+import { WidgetCards } from 'components'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={GlobalTheme}>
+      <GlobalStyle/>
+        <Wrapper>
+          <WidgetCards/>
+        </Wrapper>
+    </ThemeProvider>
   );
 }
+
+const Wrapper = styled.div` 
+  padding-top: 20px;
+`
 
 export default App;
