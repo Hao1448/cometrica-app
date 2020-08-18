@@ -2,33 +2,46 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components'
 import breakpoint from 'styled-components-breakpoint'
 import { Container, Grid, CardShip } from 'components'
-import { h2 } from 'base/mixins/text'
+// import { h2 } from 'base/mixins/text'
 
 const WidgetCards = () => {
-    const [ ships, setShips ] = useState([]);
+    const [ ships, setShips ] = useState()
+   
 
     useEffect(()=> {
         fetch("https://swapi.dev/api/films/2")
             .then(res => res.json())
             .then(film => {
                 const starships = film.starships
-                setShips(starships)
-            })
+                debugger
+                const array = []
+                starships.forEach(ship => {
+                    fetch(ship)
+                        .then(res => res.json())
+                        .then(data => { 
+                            array[array.length] = data
+                        })
+                })
+                console.log(array)
+                setShips(array) 
+            }) 
+           
     }, [])
  
     if(!ships) {
         return 'Loading...'
     }
-
+    console.log(ships)
     return (
         <Wrapper>
             <Container>
+            <h1>ебана</h1>
                 <Grid >
                     {
-                        ships.map((link) => {
+                        ships.map((ship) => {
                             return (
-                                <Card key={link}>
-                                    <CardShip link={link}/>
+                                <Card key={ship}>
+                                    <CardShip ship={ship}/>
                                 </Card>
                             )
                         })
@@ -49,20 +62,20 @@ const Card = styled.div`
         grid-column:  2 / span 10;
     `}
 `
-const Input = styled.input`
-    ${h2};
-    padding: 10px;
-    grid-row: 1;
-    grid-column: 4 / span 6;
-    border-radius: 10px;
-    border: 1px solid ${p => p.theme.color.primary};
-    color: ${p => p.theme.color.black};
-    &:hover, &:focus, &:active {
-        outline: none;
-    }
-    ${breakpoint('xs', 'sm')`
-        grid-column:  2 / span 10;
-    `}
-`
+// const Input = styled.input`
+//     ${h2};
+//     padding: 10px;
+//     grid-row: 1;
+//     grid-column: 4 / span 6;
+//     border-radius: 10px;
+//     border: 1px solid ${p => p.theme.color.primary};
+//     color: ${p => p.theme.color.black};
+//     &:hover, &:focus, &:active {
+//         outline: none;
+//     }
+//     ${breakpoint('xs', 'sm')`
+//         grid-column:  2 / span 10;
+//     `}
+// `
 
 export default WidgetCards
