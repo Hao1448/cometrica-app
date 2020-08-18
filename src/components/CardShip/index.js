@@ -1,28 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components'
-import { h2, p, p_small } from 'base/mixins/text'
+// import { h2, p } from 'base/mixins/text'
 
-const CardShip = ({link}) => {
-    const [ ship, setShip ] = useState([]);
-
-    useEffect(()=> {
-        fetch(link)
-            .then(res => res.json())
-            .then(ship => {
-                setShip(ship)
-            })
-    }, [])
-    console.log(ship)
+const CardShip = (ship) => {
     return (
         <Wrapper>
-            <Title>Название {ship.name}</Title>
-            <Text>Грузоподъемность{ship.cargo_capacity}</Text>
-            <Text>Стоимость{ship.cost_in_credits}</Text>
+            {/* <Title>{ship.name}</Title>
+            <Text>Грузоподъемность {ship.cargo_capacity}</Text>
+            <Text>Стоимость {ship.cost_in_credits}</Text>
             <Text>Экипаж {ship.crew}</Text>
             <Text>Рейтинг гипердвигателя {ship.hyperdrive_rating}</Text>
             <Text>Длина {ship.length}</Text>
             <Text>Скорость в атмосфере {ship.max_atmosphering_speed}</Text>
-            <Text>Пассажиры {ship.passengers}</Text>
+            <Text>Пассажиры {ship.passengers}</Text> */}
         </Wrapper>
     )
 }
@@ -38,23 +28,13 @@ const Wrapper = styled.div`
         box-shadow: 0 0 5px 5px  ${p => p.theme.color.primary};
     }
 `
-const Row = styled.div`
-    display: flex;
-    align-items: center;
-    & + & {
-        margin-top: 10px;
-    }
-`
-const Title = styled.div`
-    ${h2};
-`
-const UserName = styled.div`
-    ${p_small};
-    margin-left: 20px;
-    color: ${p => p.theme.color.grey};
-`
-const Text = styled.div`
-    ${p};
-`
+
+// const Title = styled.div`
+//     ${h2};
+// `
+// const Text = styled.div`
+//     ${p};
+//     margin-top: 15px;
+// `
 
 export default CardShip
