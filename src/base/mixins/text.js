@@ -25,14 +25,10 @@ const h2 = ({ theme }) => css`
 const p = ({ theme }) => css`
     font-size: 18px;
 `
-const p_small = ({ theme }) => css`
-    font-size: 16px;
-`
 
 
 export {
     h1,
     h2,
-    p,
-    p_small
+    p
 }
