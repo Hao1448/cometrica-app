@@ -1,18 +1,18 @@
 import React from 'react';
 import styled from 'styled-components'
-// import { h2, p } from 'base/mixins/text'
+import { h2, p } from 'base/mixins/text'
 
-const CardShip = (ship) => {
+const CardShip = ({ship}) => {
     return (
         <Wrapper>
-            {/* <Title>{ship.name}</Title>
+            <Title>{ship.name}</Title>
             <Text>Грузоподъемность {ship.cargo_capacity}</Text>
             <Text>Стоимость {ship.cost_in_credits}</Text>
             <Text>Экипаж {ship.crew}</Text>
             <Text>Рейтинг гипердвигателя {ship.hyperdrive_rating}</Text>
             <Text>Длина {ship.length}</Text>
             <Text>Скорость в атмосфере {ship.max_atmosphering_speed}</Text>
-            <Text>Пассажиры {ship.passengers}</Text> */}
+            <Text>Пассажиры {ship.passengers}</Text>
         </Wrapper>
     )
 }
@@ -29,12 +29,14 @@ const Wrapper = styled.div`
     }
 `
 
-// const Title = styled.div`
-//     ${h2};
-// `
-// const Text = styled.div`
-//     ${p};
-//     margin-top: 15px;
-// `
+const Title = styled.div`
+    ${h2};
+`
+const Text = styled.div`
+    ${p};
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+`
 
 export default CardShip
