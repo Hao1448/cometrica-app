@@ -6,32 +6,49 @@ import { Container, Grid, CardShip } from 'components'
 
 const WidgetCards = () => {
     const [ ships, setShips ] = useState()
-   
 
-    useEffect(()=> {
-        fetch("https://swapi.dev/api/films/2")
-            .then(res => res.json())
-            .then(film => {
-                const starships = film.starships
-                debugger
-                const array = []
-                starships.forEach(ship => {
-                    fetch(ship)
-                        .then(res => res.json())
-                        .then(data => { 
-                            array[array.length] = data
-                        })
-                })
-                console.log(array)
-                setShips(array) 
-            }) 
-           
-    }, [])
- 
+
+    // useEffect(()=> {
+    //     fetch("https://swapi.dev/api/films/2")
+    //         .then(res => res.json())
+    //         .then(film => {
+    //             const starships = film.starships //Ссылки на данные конкретных
+    //             const array = []
+    //             starships.forEach(ship => {
+    //                 fetch(ship)
+    //                     .then(res => res.json())
+    //                     .then(data => { 
+    //                         array[array.length] = data
+    //                     })
+    //             })
+    //             console.log(array)
+    //             setShips(array) 
+    //         })          
+    // }, [])
+
+    useEffect(async () => {  //еще одна попытка
+        let response = await fetch('https://swapi.dev/api/films/2');
+        let data = await response.json();
+        
+        const starships = data.starships
+        const array = []
+
+        function fullArray(array) {
+            starships.forEach(async(ship) => {
+                let response = await fetch(ship);
+                let data = await response.json();
+                array.push(data)
+            })
+            return array
+        }
+        let result = await fullArray(array)
+        console.log(result)
+
+      }, []);
+      
     if(!ships) {
         return 'Loading...'
     }
-    console.log(ships)
     return (
         <Wrapper>
             <Container>
