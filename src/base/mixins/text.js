@@ -13,7 +13,7 @@ const h = ({ theme }) => css`
 const h1 = ({ theme }) => css`
     ${h};
     font-size: 64px;
-    font-weight: 600;
+    font-weight: 700;
     ${breakpoint('xs', 'sm')`
         font-size: 44px;
     `}
@@ -21,7 +21,6 @@ const h1 = ({ theme }) => css`
 
 const h2 = ({ theme }) => css`
     ${h};
-    font-weight: 500;
     font-size: 24px;
 `
 
