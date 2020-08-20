@@ -10,7 +10,9 @@ export const GlobalTheme = {
     },
     color: {
         grey:'#b8babd',
-        grey_dark:'#6e6f71',
         blue: '#0070c9'
+    },
+    fonts: {
+        primary: `'Roboto', sans-serif`,
     }
 }
