@@ -1,18 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components'
 import breakpoint from 'styled-components-breakpoint'
-import { Container, Grid, CardShip } from 'components'
-
-const DropDown = ({ships = [], onChange}) => {
-    return (<select onChange={onChange}>
-        {
-            ships.map(ship => (<option
-                key={ship.name}
-                value={ship.name}
-            >{ship.name}</option>))
-        }
-    </select>)
-}
+import { Container, Grid, CardShip, DropDown } from 'components'
 
 const WidgetCards = () => {
     const [ ships, setShips ] = useState()
@@ -40,20 +29,24 @@ const WidgetCards = () => {
     return (
         <Wrapper>
             <Container>
-                <DropDown ships={ships} onChange={(e) => setMainShip(e.target.value)} />
-                <DropDown ships={ships} onChange={(e) => setSecondaryShip(e.target.value)} />
-                <Grid >
+                <Grid>
+                    <DropWrapper>
+                        <DropDown ships={ships} onChange={(e) => setMainShip(e.target.value)} />
+                    </DropWrapper>
+                    <DropWrapper>
+                        <DropDown ships={ships} onChange={(e) => setSecondaryShip(e.target.value)} />
+                    </DropWrapper>
                     {mainShipObject &&
-                    <Card>
-                        <CardShip
-                            mode="main"
-                            ship={mainShipObject}
-                        />
-                    </Card>
+                        <Card className="mainCard">
+                            <CardShip
+                                mode="main"
+                                ship={mainShipObject}
+                            />
+                        </Card>
                     }
                     {
                         secondaryShipObject &&
-                        <Card>
+                        <Card className="secondaryCard">
                             <CardShip
                                 mode={mainShipObject ? "secondary" : "main"}
                                 ship={secondaryShipObject}
@@ -70,12 +63,36 @@ const WidgetCards = () => {
 const Wrapper = styled.div`
     padding: 40px 0;
 `
-
-const Card = styled.div`
+const DropWrapper = styled.div`
     grid-column: span 3;
+    &:first-child {
+        grid-column: 4 / span 3;
+        ${breakpoint('xs', 'sm')`
+            grid-column:  span 12;
+        `}
+    }
     ${breakpoint('xs', 'sm')`
-        grid-column:  2 / span 10;
+        grid-column:  span 12;
     `}
+`
+const Card = styled.div`
+    grid-row: 2;
+    &.mainCard {
+        grid-column: 3 / span 4;
+        ${breakpoint('xs', 'sm')`
+            grid-row: 3;
+            grid-column:  span 12;
+        `}
+    }
+    &.secondaryCard {
+        grid-column: 7 / span 4;
+        ${breakpoint('xs', 'sm')`
+            grid-row: 4;
+            grid-column:  span 12;
+        `}
+    }
+    
+   
 `
 
 export default WidgetCards
