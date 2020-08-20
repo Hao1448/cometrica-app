@@ -1,5 +1,5 @@
 import { css } from 'styled-components'
-
+import breakpoint from 'styled-components-breakpoint'
 
 const h = ({ theme }) => css`
     line-height: 1.15;
@@ -12,8 +12,11 @@ const h = ({ theme }) => css`
 
 const h1 = ({ theme }) => css`
     ${h};
-    font-size: 54px;
+    font-size: 64px;
     font-weight: 600;
+    ${breakpoint('xs', 'sm')`
+        font-size: 44px;
+    `}
 `
 
 const h2 = ({ theme }) => css`
