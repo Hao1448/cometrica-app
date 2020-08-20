@@ -9,8 +9,8 @@ export const GlobalTheme = {
         hd: 1920
     },
     color: {
-        primary: 'rgb(255, 105, 0)',
-        black: '#333333',
-        grey: '#ADADAD',
+        grey:'#b8babd',
+        grey_dark:'#6e6f71',
+        blue: '#0070c9'
     }
 }
