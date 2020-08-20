@@ -50,7 +50,7 @@ const CardShip = ({ship, mode, mainShip}) => {
             {
                 Object.keys(fields).map(field => (
                     <Text key={field}>
-                        <Name style={{fontSize: '1em'}}>{fields[field]}</Name>
+                        <Name>{fields[field]}</Name>
                         <Feature>
                             {ship[field]+' '}
                             {secondaryFlag && compare(ship, mainShip, field)}
