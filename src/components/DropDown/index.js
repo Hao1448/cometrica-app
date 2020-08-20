@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { h2 } from 'base/mixins/text'
 
-const DropDown = ({ships = [], onChange}) => {
+const DropDown = ({ ships = [], onChange }) => {
     return (
         <Wrapper onChange={onChange}>
             {
