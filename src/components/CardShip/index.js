@@ -19,6 +19,7 @@ const CardShip = ({ship, mode, mainShip}) => {
     const compare = (ship, mainShip, field) => {
         const shipValue = Math.round(ship[field].replace(',','') * 100);
         const mainShipValue = Math.round(mainShip[field].replace(',','') * 100);
+        
         let delta = null;
         if(!Number.isNaN(shipValue) && !Number.isNaN(mainShipValue)) {
             delta = shipValue - mainShipValue;
@@ -27,23 +28,22 @@ const CardShip = ({ship, mode, mainShip}) => {
             }
             if(delta > 0) {
                 return (
-                    <span style={{color:'green'}}>
-                        {`(+${delta/100})`}
-                    </span>
+                    <Delta className='plus'>
+                        {`(+${new Intl.NumberFormat('ru-RU').format(delta/100)})`}
+                    </Delta>
                 )
             }
             if(delta < 0) {
                 return (
-                    <span style={{color:'red'}}>
-                        {`(${delta/100})`}
-                    </span>
+                    <Delta className='minus'>
+                        {`(${new Intl.NumberFormat('ru-RU').format(delta/100)})`}
+                    </Delta>
                 )
             }
         } else {
             return '';
         }
     }
-
     return (
         <Wrapper>
             <Title>{ship.name}</Title>
@@ -52,7 +52,7 @@ const CardShip = ({ship, mode, mainShip}) => {
                     <Text key={field}>
                         <Name>{fields[field]}</Name>
                         <Feature>
-                            {ship[field]+' '}
+                            {ship[field] + ' '}
                             {secondaryFlag && compare(ship, mainShip, field)}
                         </Feature>
                     </Text>
@@ -88,5 +88,14 @@ const Name = styled.div`
 `
 const Feature = styled.div`
     text-align: right;
+`
+
+const Delta = styled.div`
+    &.plus {
+        color: ${p => p.theme.color.green}
+    }
+    &.minus {
+        color: ${p => p.theme.color.red}
+    }
 `
 export default CardShip
